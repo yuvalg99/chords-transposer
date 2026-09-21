@@ -307,3 +307,9 @@ top of `src/content/detect.js` (`MIN_GROUP_CHORDS`, `MIN_GROUP_RATIO`,
 
 This transposes what the page already shows you — it is a chord calculator
 wired to the DOM, not a way to reach content a site hasn't served you.
+
+## Privacy
+
+No data is collected, and the extension makes no network requests. Settings and
+per-song transpose state stay in `chrome.storage.local` on your machine. Full
+policy: [PRIVACY.md](PRIVACY.md).
