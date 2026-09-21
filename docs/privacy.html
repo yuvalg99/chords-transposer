@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Chords Transposer</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fbfaf8;
+    --fg: #1d1c1a;
+    --muted: #6b6864;
+    --rule: #e2ded8;
+    --accent: #7a4a1f;
+    --card: #f3f0ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161513;
+      --fg: #eceae6;
+      --muted: #a09b94;
+      --rule: #2e2c28;
+      --accent: #d8a56b;
+      --card: #201e1b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 42rem; margin: 0 auto; padding: 3.5rem 1.25rem 5rem; }
+  h1 { font-size: 1.85rem; line-height: 1.2; margin: 0 0 .35rem; letter-spacing: -.01em; }
+  .date { color: var(--muted); font-size: .875rem; margin: 0 0 2.25rem; }
+  h2 {
+    font-size: 1.05rem; margin: 2.5rem 0 .75rem; letter-spacing: -.005em;
+    padding-top: 1.25rem; border-top: 1px solid var(--rule);
+  }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+  li { margin: 0 0 .6rem; }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .875em; background: var(--card); padding: .1em .35em; border-radius: 4px;
+  }
+  .lede {
+    font-size: 1.15rem; line-height: 1.5; color: var(--fg);
+    background: var(--card); border-left: 3px solid var(--accent);
+    padding: 1rem 1.15rem; border-radius: 0 8px 8px 0; margin: 0 0 1.75rem;
+  }
+  a { color: var(--accent); }
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .875rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Privacy Policy — Chords Transposer</h1>
+  <p class="date">Last updated: September 21, 2026</p>
+
+  <p class="lede">Chords Transposer collects nothing.</p>
+
+  <p>The extension does not collect, store on any server, transmit, sell, or share
+  any personal or sensitive user information. There are no accounts, no analytics,
+  no telemetry, no advertising, no crash reporting, and no third-party services of
+  any kind. The extension makes no network requests at all — every chord is parsed,
+  transposed, drawn, and sounded locally in your browser.</p>
+
+  <h2>What is stored on your device</h2>
+  <p>The extension uses Chrome's local extension storage (<code>chrome.storage.local</code>)
+  to remember your own settings between page loads. This data never leaves your
+  computer and is not readable by the websites you visit or by anyone else:</p>
+  <ul>
+    <li><strong>Per-song transpose state</strong> — how many semitones you moved a
+    song, saved under a key derived from the page address so the song reads the
+    same when you come back to it.</li>
+    <li><strong>Display preferences</strong> — accidental spelling, chord diagrams
+    on or off, sound on or off, auto-scroll speed, panel position and size.</li>
+    <li><strong>Per-site off switch</strong> — the list of sites where you chose to
+    turn the extension off.</li>
+  </ul>
+
+  <h2>Deleting your data</h2>
+  <ul>
+    <li>Click the extension icon and use <strong>Forget saved songs</strong> to
+    clear saved transpose state.</li>
+    <li>Removing the extension from <code>chrome://extensions</code> deletes all of
+    its stored data.</li>
+  </ul>
+
+  <h2>Permissions and why they are needed</h2>
+  <ul>
+    <li><code>storage</code> — to save the settings described above on your device.</li>
+    <li><code>activeTab</code> — when you click the toolbar icon, this lets the
+    popup talk to the page you are currently looking at, so it can read the current
+    key and apply a transpose. It applies only to that one tab, only while the
+    popup is open.</li>
+    <li><strong>Access to all websites</strong> (the <code>*://*/*</code> content
+    script match) — chord and tab sheets live on thousands of sites, from large
+    archives to personal songbooks and forum posts, so there is no fixed list of
+    addresses that would cover them. The script is passive: it reads the page's own
+    visible text looking for chord patterns, and if the page is not a chord sheet it
+    does nothing at all — no interface, no stored data, no change to the page. It
+    never reads passwords, form fields, or cookies, and it never sends anything
+    anywhere.</li>
+  </ul>
+
+  <h2>Remote code</h2>
+  <p>The extension runs only the code shipped inside its package. It does not
+  download, inject, or evaluate code from any remote source.</p>
+
+  <h2>Children</h2>
+  <p>The extension collects no data from anyone, including children.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If this policy ever changes, the updated version will be published at this
+  address with a new date at the top.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: ADD-YOUR-CONTACT-EMAIL</p>
+
+  <footer>Chords Transposer — a Chrome extension that transposes chords in the page itself.</footer>
+</main>
+</body>
+</html>
