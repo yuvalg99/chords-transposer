@@ -1,0 +1,57 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Chords Transposer</title>
+<style>
+  :root { color-scheme: dark; }
+  body { width: 264px; margin: 0; padding: 14px;
+         font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+         background: #1b1e2b; color: #e8eaf2; }
+  h1 { margin: 0 0 10px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: #9aa3c0; }
+  .card { background: #232739; border: 1px solid #333a52; border-radius: 10px; padding: 10px; margin-bottom: 10px; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .row + .row { margin-top: 7px; }
+  .muted { color: #8b93b0; }
+  .value { font-weight: 700; }
+  button { font: inherit; border-radius: 8px; border: 1px solid #3a4260; background: #2a3050; color: #e8eaf2;
+           padding: 6px 10px; cursor: pointer; }
+  button:hover { background: #38406a; }
+  button.primary { background: #4655a8; border-color: #4655a8; color: #fff; width: 100%; }
+  button.ghost { background: transparent; color: #8b93b0; border-color: transparent; padding: 4px 6px; }
+  button.ghost:hover { color: #fff; background: #333a52; }
+  .steps { display: flex; align-items: center; gap: 8px; }
+  .steps button { width: 34px; font-size: 16px; }
+  .steps .n { flex: 1; text-align: center; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .keyline { margin-top: 8px; text-align: center; font-size: 13px; color: #8b93b0; min-height: 18px; }
+  .keyline b { color: #8ee0b0; }
+  .keyline .capo { display: block; font-size: 11px; color: #6f7794; margin-top: 2px; }
+  .hint { font-size: 11px; color: #6f7794; text-align: center; margin-top: 10px; }
+  .hidden { display: none; }
+</style>
+
+<h1>Chords Transposer</h1>
+
+<div class="card hidden" id="controls">
+  <div class="steps">
+    <button id="down" title="Down a semitone">−</button>
+    <div class="n" id="steps">0</div>
+    <button id="up" title="Up a semitone">+</button>
+  </div>
+  <div class="keyline" id="keyline"></div>
+  <div class="row" style="margin-top:8px">
+    <button class="ghost" id="reset">Reset</button>
+    <button class="ghost" id="show">Show panel</button>
+  </div>
+</div>
+
+<div class="card hidden" id="note-card">
+  <div class="muted" id="note">No chords found on this page.</div>
+  <div style="margin-top:8px"><button class="primary" id="look">Look again anyway</button></div>
+</div>
+
+<div class="row">
+  <button class="ghost" id="site-toggle">Turn off on this site</button>
+  <button class="ghost" id="forget">Forget saved keys</button>
+</div>
+<div class="hint">In the page: Alt+Shift+↑ / ↓ · Alt+Shift+0</div>
+
+<script src="popup.js"></script>

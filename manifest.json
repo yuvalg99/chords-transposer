@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Chords Transposer",
+  "version": "2.12.1",
+  "description": "Transpose the chords on any chord or tab site, in the page itself. Runs locally \u2014 no account, no server.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "action": {
+    "default_title": "Chords Transposer",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/core/chords.js",
+        "src/core/shapes.js",
+        "src/content/detect.js",
+        "src/content/quirks.js",
+        "src/content/diagram.js",
+        "src/content/audio.js",
+        "src/content/tooltip.js",
+        "src/content/panel.js",
+        "src/content/main.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

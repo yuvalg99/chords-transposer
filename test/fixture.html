@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<title>Chords Transposer — fixture</title>
+<!--
+  Reproduces the markup of the supported sites so the content scripts can be
+  exercised without loading the extension:  npx serve . && open test/fixture.html
+  (lyrics here are placeholder text, only the chord markup matters)
+-->
+<style>
+  body { font-family: system-ui, sans-serif; background: #f4f5f9; margin: 0; padding: 24px; }
+  h2 { font: 600 13px system-ui; text-transform: uppercase; letter-spacing: .05em; color: #667; margin: 24px 0 8px; }
+  .sheet { background: #fff; border: 1px solid #dde; border-radius: 10px; padding: 16px; }
+
+  /* --- tab4u --- */
+  .t4 table { border-collapse: collapse; }
+  .t4 td.chords, .t4 td.song { font-family: "Courier New", Courier, monospace; font-size: 16px; white-space: normal; }
+  .t4 td.chords { direction: ltr; text-align: left; color: #1a56b0; font-weight: 700; }
+  .t4 td.song { direction: rtl; }
+  .t4 .c_C { cursor: pointer; }
+  .t4 .vHR { color: #aab; }
+
+  /* --- negina --- */
+  .ng .phrase-cluster { display: inline-flex; }
+  .ng .phrase { display: inline-block; margin-inline-start: 10px; text-align: right; }
+  .ng .chord { font: 700 14px Assistant, sans-serif; color: #c2410c; display: inline-block; }
+  .ng .lyric { font: 16px Assistant, sans-serif; }
+  .ng .slp-chord-card { display: inline-block; width: 64px; text-align: center; margin-inline-end: 8px; }
+  .ng .slp-chord-card__diagram { height: 52px; background: repeating-linear-gradient(90deg,#333 0 1px,transparent 1px 12px),
+      repeating-linear-gradient(0deg,#333 0 1px,transparent 1px 12px); border: 1px solid #333; }
+  .ng .slp-chord-card__name { font: 700 13px Assistant, sans-serif; margin-top: 4px; }
+
+  /* --- generic monospace sheet --- */
+  pre.chordsheet { font-family: "Courier New", monospace; font-size: 15px; direction: ltr; text-align: left; }
+</style>
+
+<h2>tab4u layout (span.c_C in monospace td.chords)</h2>
+<div class="sheet t4">
+  <table>
+    <tr><td class="song">פתיחה:</td></tr>
+    <tr><td class="chords firstChords"><span class="vHR">|</span>&nbsp;<span id="c_1" class="c_C" onmouseover="window.__hover='D#m'">D#m</span>&nbsp;<span class="vHR">|</span>&nbsp;<span id="c_2" class="c_C" onmouseover="window.__hover='A#m'">A#m</span>&nbsp;<span class="vHR">|</span></td></tr>
+    <tr><td class="chords">&nbsp;&nbsp;&nbsp;&nbsp;<span id="c_3" class="c_C">G#m</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="c_77" class="c_C">D#m/F#</span>&nbsp;&nbsp;&nbsp;<span id="c_4" class="c_C">Fm7b5</span>&nbsp;&nbsp;<span id="c_5" class="c_C">A#</span></td></tr>
+    <tr><td class="song">שורת מילים לדוגמה ......... עוד מילים</td></tr>
+    <tr><td class="chords"><span id="c_6" class="c_C">C#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="c_7" class="c_C">G#</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="c_8" class="c_C">A#m</span></td></tr>
+    <tr><td class="song">עוד שורת מילים לדוגמה בלבד</td></tr>
+  </table>
+</div>
+
+<h2>negina layout (div.chord per phrase + chord cards)</h2>
+<div class="sheet ng">
+  <div>
+    <span class="phrase-cluster"><div class="phrase"><div class="lyric">מילה</div></div><div class="phrase join"><div class="chord">Bbm</div><div class="lyric">שנייה</div></div></span>
+    <span class="phrase-cluster"><div class="phrase"><div class="chord">Gb</div><div class="lyric">שלישית</div></div><div class="phrase"><div class="chord">Ab7</div><div class="lyric">רביעית</div></div></span>
+  </div>
+  <div style="margin-top:14px">
+    <div class="slp-chord-card"><div class="slp-chord-card__diagram"></div><div class="slp-chord-card__name">Bbm</div></div>
+    <div class="slp-chord-card"><div class="slp-chord-card__diagram"></div><div class="slp-chord-card__name">Gb</div></div>
+    <div class="slp-chord-card"><div class="slp-chord-card__diagram"></div><div class="slp-chord-card__name">Ab7</div></div>
+  </div>
+</div>
+
+<h2>generic monospace sheet (plain text, no chord elements)</h2>
+<div class="sheet">
+<pre class="chordsheet">
+Am      F       C       G
+line of placeholder words here
+Dm      E7      Am
+another placeholder line
+</pre>
+</div>
+
+
+
+<h2>ultimate-guitar layout (pre &gt; div, one text node per line)</h2>
+<div class="sheet">
+<pre class="ug" style="white-space:pre;font-family:'Roboto Mono','Courier New',monospace;font-size:14px;direction:ltr;text-align:left"><div id="ug-body"></div></pre>
+</div>
+
+<script>
+  // UG splits the sheet into a text node per line plus a separate newline node,
+  // with no elements around the chords. Rebuilt here exactly.
+  (function () {
+    const lines = [
+      'Bm                         A            ',
+      'placeholder words for the first line    ',
+      'Bm                     A                ',
+      'more placeholder words on this line     ',
+      'E                          Bm           ',
+      'e|---0---2---3---|                      '
+    ];
+    const body = document.getElementById('ug-body');
+    for (const line of lines) {
+      body.appendChild(document.createTextNode(line));
+      body.appendChild(document.createTextNode('\n'));
+    }
+  })();
+</script>
+
+
+<h2>hidden alternate key (a second version of the song, display:none)</h2>
+<div class="sheet ng">
+  <div id="shown-version">
+    <span class="phrase-cluster"><div class="phrase"><div class="chord">Ebm</div><div class="lyric">מילה</div></div><div class="phrase"><div class="chord">Bbm</div><div class="lyric">שנייה</div></div><div class="phrase"><div class="chord">Abm</div><div class="lyric">שלישית</div></div></span>
+  </div>
+  <div id="hidden-version" style="display:none">
+    <span class="phrase-cluster"><div class="phrase"><div class="chord">Am</div><div class="lyric">מילה</div></div><div class="phrase"><div class="chord">Em</div><div class="lyric">שנייה</div></div><div class="phrase"><div class="chord">Dm</div><div class="lyric">שלישית</div></div></span>
+  </div>
+</div>
+
+<h2>traps — none of these may be touched</h2>
+<div class="sheet">
+  <nav class="artist-index" style="direction:ltr">
+    <a href="#">A</a> <a href="#">B</a> <a href="#">C</a> <a href="#">D</a>
+    <a href="#">E</a> <a href="#">F</a> <a href="#">G</a> <a href="#">H</a>
+  </nav>
+  <p id="prose" style="direction:ltr">
+    A song in <b>C</b> is easy, and <b>G</b> is friendly, but the words
+    <b>Cab</b>, <b>Dominant</b> and <b>Bad</b> are only words.
+  </p>
+  <ul id="menu" style="direction:ltr"><li><span>Am</span></li><li><span>Home</span></li><li><span>About</span></li></ul>
+</div>
+
+<h2>chord diagrams (dimmed while transposed)</h2>
+<div class="sheet">
+  <img id="diagram-img" alt="Bbm" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="40" height="40">
+</div>
+
+<script>
+  // Minimal stand-ins for the extension APIs so the content scripts can run
+  // straight from the filesystem / a static server.
+  // a page that wires its own hover with addEventListener, not an attribute
+  window.__pageHoverFired = 0;
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.querySelector('.ng .chord');
+    if (el) el.addEventListener('mouseover', () => { window.__pageHoverFired++; });
+  });
+
+  window.chrome = {
+    storage: { local: { get: (keys, cb) => cb({}), set: () => {}, remove: () => {} } },
+    runtime: { onMessage: { addListener: () => {} } }
+  };
+</script>
+<script src="../src/core/chords.js"></script>
+<script src="../src/core/shapes.js"></script>
+<script src="../src/content/detect.js"></script>
+<script src="../src/content/quirks.js"></script>
+<script src="../src/content/diagram.js"></script>
+<script src="../src/content/audio.js"></script>
+<script src="../src/content/tooltip.js"></script>
+<script src="../src/content/panel.js"></script>
+<script src="../src/content/main.js"></script>

@@ -1,0 +1,11 @@
+{
+  "name": "chords-transposer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension that transposes the chords shown on guitar/chord sites.",
+  "scripts": {
+    "test": "node --test test/chords.test.cjs test/shapes.test.cjs",
+    "icons": "node tools/make-icons.mjs",
+    "fixture": "node tools/serve-fixture.cjs"
+  }
+}
